@@ -21,6 +21,7 @@ const BootstrapInput = withStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #ced4da',
     fontSize: 16,
+    height:'34px',
     padding: '10px 26px 10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
@@ -47,13 +48,13 @@ const BootstrapInput = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   input1: {
     margin: theme.spacing(2),
-    marginBottom:theme.spacing(4),
+    marginBottom:theme.spacing(8),
     width:'30rem'
   },
   input2: {
-    margin: theme.spacing(2),
-    marginBottom:theme.spacing(4),
-    width:'6rem'
+    margin: theme.spacing(3),
+    marginBottom:theme.spacing(8),
+    width:'8rem',
   },
   container:{
     position:'absolute',
@@ -61,12 +62,12 @@ const useStyles = makeStyles((theme) => ({
     left:'32vw'
   },
   urlInput:{
-    // position:'relative',
-    // top:'30px',
+    position:'relative',
+    top:'32px',
     height:'10px',
-    width:'28rem',
+    width:'30rem',
     padding:'0px',
-    margin:'0px'
+    marginBottom:'50px'
   }
 }));
 
@@ -88,11 +89,11 @@ export default function Home() {
   }
   return (
     <div className={classes.container}>
-      {/* <FormControl className={classes.input1}> */}
-        <TextField className ={classes.urlInput} id="outlined-basic" value={url} onChange={handleOnChange} label="Input your web url" variant="outlined" />
-      {/* </FormControl> */}
+      <FormControl className={classes.input1}>
+        <TextField className ={classes.urlInput} id="outlined-basic" value={url} onChange={handleOnChange} label="Enter your web url" variant="outlined" />
+      </FormControl>
       <FormControl className={classes.input2}>
-        <InputLabel id="demo-customized-select-label">Interval</InputLabel>
+        <InputLabel id="demo-customized-select-label">Duration</InputLabel>
         <Select
           defaultValue='Enter your web url'
           labelId="demo-customized-select-label"

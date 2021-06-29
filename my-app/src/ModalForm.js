@@ -34,15 +34,18 @@ export default function ModalForm(props) {
     try {
       
       const interval = setInterval( async function(){
+
         const response = await axios.get(props.url);
-        console.log('response', response.status);
+      
         if(response.status!==201 && response.status!==200){
+
           const data = {
             status:response.status,
             website:props.url,
             receiverEmail:email,
             phone_no: phone
           }
+
           if(email && phone){
             await axios.post("http://localhost:4000/send_email", {
               data
@@ -84,7 +87,7 @@ export default function ModalForm(props) {
 
   return (
     <div>
-      <Button variant="outlined" style={{width:'96%',position:'absolute',left:'12px'}} disabled={setDisable()} color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" style={{width:'96%', height:'50px',position:'absolute',left:'12px'}} disabled={setDisable()} color="primary" onClick={handleClickOpen}>
         Monitor your website
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
