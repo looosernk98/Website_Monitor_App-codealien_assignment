@@ -25,7 +25,7 @@ const myEmail = process.env.MY_EMAIL;
 app.post('/send_email',async function(req,res){
 
     const response =  req.body.data;
-
+   console.log("backend", response)
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {

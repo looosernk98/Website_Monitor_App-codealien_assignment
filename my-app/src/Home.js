@@ -6,6 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
+import {Link,BrowserRouter,Switch,Route} from 'react-router-dom'
+import Page from './Page'
+import Button from '@material-ui/core/Button';
 
 import ModalForm from './ModalForm'
 
@@ -68,6 +71,15 @@ const useStyles = makeStyles((theme) => ({
     width:'30rem',
     padding:'0px',
     marginBottom:'50px'
+  },
+  link:{
+    width: '100px',
+    // border: '2px solid #e0e0e0',
+    height: '30px',
+    position: 'relative',
+    marginTop: '20px',
+    top: '50px',
+    left:'17vw'
   }
 }));
 
@@ -77,6 +89,7 @@ export default function Home() {
   const [url, setUrl] = useState('');
   const [isUrlEntered, setUrlEntered] = useState(false);
   const [isTimeSelected, setTimeSelected] = useState(false);
+  const [list, setList] = useState([])
 
   const handleChange = (e) => {
     setTime(e.target.value);
@@ -89,6 +102,7 @@ export default function Home() {
   }
   return (
     <div className={classes.container}>
+      <div>
       <FormControl className={classes.input1}>
         <TextField className ={classes.urlInput} id="outlined-basic" value={url} onChange={handleOnChange} label="Enter your web url" variant="outlined" />
       </FormControl>
@@ -105,6 +119,7 @@ export default function Home() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
+          <MenuItem value={5}>5 seconds</MenuItem>
           <MenuItem value={10}>10 seconds</MenuItem>
           <MenuItem value={60}>1 minute</MenuItem>
           <MenuItem value={300}>5 minutes</MenuItem>
@@ -115,7 +130,32 @@ export default function Home() {
           <MenuItem value={86400}>daily</MenuItem>
         </Select>
       </FormControl>
-      <ModalForm isUrlEntered={isUrlEntered} isTimeSelected={isTimeSelected} url={url} time={time}/>
+      <ModalForm 
+       isUrlEntered={isUrlEntered}
+       isTimeSelected={isTimeSelected} 
+       url={url} 
+       time={time} 
+       list={list} 
+       setList={setList}/>
+
+      </div>
+     
+      <div className={classes.link}>
+      <Link to={{
+        pathname:'/report',
+        state:{
+          urls:list,
+          lastTime:Date().toLocaleString()
+        }
+      }}>
+        <Button variant='contained' color='primary'>
+              Report
+        </Button>
+    </Link>
+         
+
+      </div>
+     
     </div>
   );
 }

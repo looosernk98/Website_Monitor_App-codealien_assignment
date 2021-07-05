@@ -20,7 +20,13 @@ export default function ModalForm(props) {
 
   const handleClose = () => {
     setOpen(false);
+    
+    props.setList([...props.list,props.url])
     websiteMonitor()
+    console.log(props.url)
+    
+    console.log(props.list);
+    alert("opened")
   };
 
   const handlePhoneChange=(e)=>{
@@ -34,9 +40,9 @@ export default function ModalForm(props) {
     try {
       
       const interval = setInterval( async function(){
-
+        
         const response = await axios.get(props.url);
-      
+      console.log("interval is working", props.url)
         if(response.status!==201 && response.status!==200){
 
           const data = {
@@ -65,12 +71,12 @@ export default function ModalForm(props) {
           }
          
         }
-      },1000)
-
-      setTimeout(function(){
-        clearInterval(interval);
-        console.log("clear interval worked")
       },props.time*1000)
+
+      // setTimeout(function(){
+      //   clearInterval(interval);
+      //   console.log("clear interval worked")
+      // },props.time*1000)
 
     } catch (error) {
       console.error(error);
@@ -78,7 +84,7 @@ export default function ModalForm(props) {
   }
 
   const setDisable=()=>{
-    console.log(props.isUrlEntered, props.isTimeSelected)
+    // console.log(props.isUrlEntered, props.isTimeSelected)
 
     if(props.isUrlEntered && props.isTimeSelected) return false
 
