@@ -20,8 +20,19 @@ export default function ModalForm(props) {
 
   const handleClose = () => {
     setOpen(false);
+    var list;
+    list = []
+    var storedList = JSON.parse(localStorage.getItem('urls'));
+    if(storedList){
+       for(let i=0; i<storedList.length; i++){
+         list.push(storedList[i]);
+       }
+    }
     
-    props.setList([...props.list,props.url])
+    localStorage.setItem('urls',JSON.stringify([...list,props.url]))
+
+    props.setList([...list,props.url])
+    
     websiteMonitor()
     console.log(props.url)
     
